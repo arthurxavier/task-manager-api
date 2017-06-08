@@ -79,7 +79,7 @@ RSpec.describe 'Users API', type: :request do
   describe 'PUT /users/:id' do
     before do
       headers = {'Accpet' => 'application/vnd.taskmanager.v1'}
-      post "/users/#{user_id}", params: { user: user_params }, headers: headers
+      put "/users/#{user_id}", params: { user: user_params }, headers: headers
     end
 
     context 'when the request params are valid' do
@@ -91,7 +91,7 @@ RSpec.describe 'Users API', type: :request do
 
       it 'returns the json data for the updated user' do
         user_response = JSON.parse(response.body, symbolize_names: true )
-        expect(json_body[:email]).to eq(user_params[:email])
+        expect(user_response[:email]).to eq(user_params[:email])
       end
     end
 
@@ -104,7 +104,7 @@ RSpec.describe 'Users API', type: :request do
 
       it 'returns the json data for the erros' do
         user_response = JSON.parse(response.body, symbolize_names: true )
-        expect(json_body).to have_key(:errors)
+        expect(user_response).to have_key(:errors)
       end
     end
   end
