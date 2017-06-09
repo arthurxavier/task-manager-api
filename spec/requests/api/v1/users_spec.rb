@@ -12,6 +12,20 @@ RSpec.describe 'Users API', type: :request do
 
   before { host! 'api.taskmanager.dev'}
 
+  describe 'GET /users' do
+    before do
+      get '/users', params: {}, headers: headers
+    end
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
+    end
+
+    # it 'returns 5 tasks from database' do
+    #   expect(json_body[:users].count).to eq(5)
+    # end
+  end
+
   describe 'GET /users/:id'do
     before do
       #especifica a versão que o usuario esta usando
